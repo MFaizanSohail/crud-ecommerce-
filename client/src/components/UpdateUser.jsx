@@ -19,7 +19,7 @@ const UpdateUser = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:3001/users/getUser/" + id)
+			.get("/users/getUser/" + id)
 			.then((result) => {
 				const userData = result.data;
 				setName(userData.name);
@@ -41,7 +41,7 @@ const UpdateUser = () => {
 
 		axios
 			.put(
-				"http://localhost:3001/users/updateUser/" + id,
+				"/users/updateUser/" + id,
 				updatedUserData
 			)
 			.then((result) => {
