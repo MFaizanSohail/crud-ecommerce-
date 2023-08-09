@@ -8,14 +8,14 @@ const User = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:3000/users/")
+			.get("/users/")
 			.then((result) => setUsers(result.data)) 
 			.catch((err) => console.log(err));
 	}, []);
 
 	const userDelete = (id) => {
 		axios
-			.delete("http://localhost:3000/users/userDelete/" + id)
+			.delete("/users/userDelete/" + id)
 			.then((res) => { 
 				console.log(res) 
 				window.location.reload()
