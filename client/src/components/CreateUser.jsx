@@ -20,7 +20,7 @@ function CreateUser() {
 		};
 
 		axios
-			.post("/users/create", userData)
+			.post("http://localhost:3000/users/create", userData)
 			.then((result) => {
 				console.log(result);
 				navigate("/");

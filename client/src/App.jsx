@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import User from './components/user';
+import User from './components/User';
 import CreateUser from './components/CreateUser';
 import UpdateUser from './components/UpdateUser';
 import UserRegistration from './components/UserRegistration';

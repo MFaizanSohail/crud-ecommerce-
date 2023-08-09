@@ -10,10 +10,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-
-// mongoose.connect("mongodb://127.0.0.1:27017/crud");
-
-
 mongoose.set('strictQuery', false);
 
 app.use("/users", userRouter);
