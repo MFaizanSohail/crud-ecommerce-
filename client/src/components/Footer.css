@@ -1,0 +1,28 @@
+/* Footer */
+.footer {
+	background-color: red;
+	padding: 20px 0;
+	color: white;
+	text-align: center;
+  }
+  
+  .footer-logo {
+	font-size: 24px;
+	font-weight: bold;
+  }
+  
+  .footer-links {
+	margin-top: 10px;
+  }
+  
+  .footer-link {
+	color: white;
+	text-decoration: none;
+	margin: 0 10px;
+  }
+  
+  /* Apply a color on hover */
+  .footer-link:hover {
+	color: green;
+  }
+  

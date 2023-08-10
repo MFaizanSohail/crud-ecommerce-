@@ -1,28 +1,43 @@
-import React from 'react';
-import './App.css'
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
-import User from './components/User';
-import CreateUser from './components/CreateUser';
-import UpdateUser from './components/UpdateUser';
-import UserRegistration from './components/UserRegistration';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import Home from "./pages/Home";
+import AdminDashboard from "./pages/AdminDashboard";
+import AddProductPage from "./pages/AddProductPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import UserLoginPage from "./pages/UserLoginPage";
+import UserUpdatePage from "./pages/UserUpdatePage";
 
 function App() {
-  // const [count, setCount] = useState(0);
+	// const [count, setCount] = useState(0);
 
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<User />}></Route>
-          <Route path='/create' element={<CreateUser />}></Route>
-          <Route path='/update/:id' element={<UpdateUser />}></Route>
-          <Route path='/signUp' element={<UserRegistration />}></Route>
-
-        </Routes>
-      </BrowserRouter>
-    </>
-  )
+	return (
+		<>
+			<BrowserRouter>
+				<Routes>
+					<Route
+						path="/AdminDashboard"
+						element={<AdminDashboard />}
+					></Route>
+					<Route path="/" element={<Home />}></Route>
+					<Route
+						path="/registration"
+						element={<RegistrationPage />}
+					></Route>
+					<Route path="/login" element={<UserLoginPage />}></Route>
+					<Route
+						path="/update/:id"
+						element={<UserUpdatePage />}
+					></Route>
+					<Route
+						path="/AddProductForm"
+						element={<AddProductPage />}
+					></Route>
+				</Routes>
+			</BrowserRouter>
+		</>
+	);
 }
 
-export default App
+export default App;

@@ -1,4 +1,7 @@
+const { response } = require("express");
 const UserModel = require("../model/UserModel");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const createUser = (req, res) => {
 	UserModel.create(req.body)
@@ -6,16 +9,43 @@ const createUser = (req, res) => {
 		.catch((err) => res.json(err));
 };
 
-const fetchuser = (req, res) => {
-	UserModel.find({})
-		.then((user) => res.json(user))
-		.catch((err) => res.json(err));
+const userLogin = async (req, res) => {
+	try {
+		const { email, password } = req.body;
+		const user = await UserModel.findOne({ email: email });
+
+		if (!user) {
+			return res.json("no record Found");
+		}
+
+		const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+		if (isPasswordCorrect) {
+			const token = jwt.sign(
+				{ email: user.email, type: user.type },
+				"jwt-secret-key",
+				{ expiresIn: "1d" }
+			);
+			res.cookie('token', token, { httpOnly: true });
+			return res.json({ status: "success", type: user.type });
+		} else {
+			return res.json("Incorrect password");
+		}
+	} catch (err) {
+		res.json(err);
+	}
 };
 
 const getUser = (req, res) => {
 	const id = req.params.id;
 	UserModel.findById({ _id: id })
 		.then((user) => res.json(user))
+		.catch((err) => res.json(err));
+};
+
+const getAllUser = (req, res) => {
+	UserModel.find()
+		.then((users) => res.json(users))
 		.catch((err) => res.json(err));
 };
 
@@ -61,7 +91,8 @@ const updateUser = (req, res) => {
 
 module.exports = {
 	createUser,
-	fetchuser,
+	getAllUser,
+	userLogin,
 	getUser,
 	updateUser,
 	userDelete,

@@ -28,7 +28,7 @@ const User = () => {
 		<>
 			<div className="d-flex vh-100 bg-primary justify-content-center align-items-center ">
 				<div className="w-50 bg-white rounded p-3">
-					<Link to="/create" className="btn btn-success">
+					<Link to="/registration" className="btn btn-success">
 						Add +
 					</Link>
 					<h1>Users Table</h1>
