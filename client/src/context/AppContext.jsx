@@ -27,6 +27,12 @@ export const AppProvider = ({ children }) => {
     }
   };
   
+  const removeFromCart = (productId) => {
+    const updatedCartItems = cartItems.filter(
+      (item) => item._id !== productId
+    );
+    setCartItems(updatedCartItems);
+  };
 
 	const logout = () => {
 		setIsLoggedIn(false);
@@ -43,6 +49,7 @@ export const AppProvider = ({ children }) => {
 				logout,
 				cartItems,
 				addToCart,
+        removeFromCart,
 			}}
 		>
 			{children}

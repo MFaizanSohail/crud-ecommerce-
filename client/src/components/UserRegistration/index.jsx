@@ -35,8 +35,8 @@ function UserRegistration() {
 	};
 
 	return (
-		<div className="d-flex vh-100 justify-content-center align-items-center bg-primary">
-			<div className="card p-4 shadow-sm w-25">
+		<div className="d-flex vh-100 justify-content-center align-items-center">
+			<div className="card p-4 shadow-sm w-25 Registration">
 				<h2 className="mb-4 text-center">User Register</h2>
 				<form onSubmit={RegisterNewUser}>
 					<div className="mb-3">
@@ -86,7 +86,7 @@ function UserRegistration() {
 							type="checkbox"
 							id="type"
 							className="form-check-input rounded-5"
-							style={{ borderColor: "rgba(0, 0, 0, 0.3)" }} 
+							style={{ borderColor: "rgba(0, 0, 0, 0.3)" }}
 							checked={type}
 							onChange={(e) => settype(e.target.checked)}
 						/>
@@ -94,15 +94,10 @@ function UserRegistration() {
 							Seller Account
 						</label>
 					</div>
-					<button type="submit" className="btn btn-success w-100">
-						Register User
-					</button>
+					<button type="submit">Register User</button>
 				</form>
 				<p className="mt-3 mb-1 text-center">
-					Already have an Account?{" "}
-					<Link to="/login" className="btn btn-link p-0">
-						Login
-					</Link>
+					Already have an Account? <Link to="/login">Login</Link>
 				</p>
 			</div>
 		</div>

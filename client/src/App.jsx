@@ -9,6 +9,7 @@ import RegistrationPage from "./pages/RegistrationPage";
 import UserLoginPage from "./pages/UserLoginPage";
 import UserUpdatePage from "./pages/UserUpdatePage";
 import CartPage from "./pages/CartPage";
+import AdminLoginPage from "./pages/AdminLoginPage";
 
 function App() {
 	// const [count, setCount] = useState(0);
@@ -27,6 +28,7 @@ function App() {
 						element={<RegistrationPage />}
 					></Route>
 					<Route path="/login" element={<UserLoginPage />}></Route>
+					<Route path="/admin/login" element={<AdminLoginPage />}></Route>
 					<Route
 						path="/update/:id"
 						element={<UserUpdatePage />}

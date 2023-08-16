@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import "./ProductItem.css";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function ProductItem({ product }) {
 	const { isLoggedIn } = useAppContext();
@@ -38,11 +39,11 @@ function ProductItem({ product }) {
 			<p style={{ textAlign: "end" }}>${product.price}</p>
 			{isLoggedIn ? (
 				<button className="add-to-cart-link" onClick={handleAddToCart}>
-					Add to Cart
+					<ShoppingCartIcon style={{color:"black"}} /> Add to Cart
 				</button>
 			) : (
 				<Link to="/login">
-					<button className="add-to-cart-link">Add to Cart</button>
+					<button className="add-to-cart-link"> <ShoppingCartIcon style={{color:"black"}} /> Add to Cart</button>
 				</Link>
 			)}
 		</div>

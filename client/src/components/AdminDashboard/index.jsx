@@ -56,7 +56,8 @@ const AdminDashboard = () => {
 												Update
 											</Link>{" "}
 											<button
-												className="btn btn-danger"
+												style={{width:"auto"}}
+												className="btn btn-success"
 												onClick={(e) => {
 													userDelete(user._id);
 												}}

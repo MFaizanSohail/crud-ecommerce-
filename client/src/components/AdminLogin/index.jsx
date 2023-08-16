@@ -1,18 +1,18 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
-import { useAppContext } from "../../context/AppContext";
-import "./UserLogin.css";
+import { useNavigate } from "react-router-dom";
+import { useAppContext  } from "../../context/AppContext";
+import "./AdminLogin.css"
 
-function UserLogin() {
+function AdminLogin() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const { setIsLoggedIn, setLoginType } = useAppContext();
+    const { setIsLoggedIn, setLoginType } = useAppContext();
 	const navigate = useNavigate();
 
 	const LoginHandler = (e) => {
-		e.preventDefault();
+		e.preventDefault(); 
 
 		const userData = {
 			email,
@@ -23,16 +23,12 @@ function UserLogin() {
 			.post("/users/login", userData)
 			.then((res) => {
 				if (res.data.type === "admin") {
-					navigate("/");
-					setIsLoggedIn(false);
-				} else if (res.data.type === "seller") {
-					navigate("/");
-					setIsLoggedIn(true);
-					setLoginType(res.data.type);
+					navigate("/AdminDashboard");
+					setIsLoggedIn(true); 
+					setLoginType(res.data.type); 	
 				} else {
-					navigate("/");
-					setIsLoggedIn(true);
-					setLoginType(res.data.type);
+					navigate("/")
+					setIsLoggedIn(false); 
 				}
 			})
 			.catch((err) => console.log(err));
@@ -42,7 +38,7 @@ function UserLogin() {
 		<div className="d-flex vh-100 justify-content-center align-items-center">
 			<div className="w-25 bg-white rounded p-4 UserLogin">
 				<form onSubmit={LoginHandler}>
-					<h2 className="mb-4 text-center">User Login</h2>
+					<h2 className="mb-4 text-center">Admin Dashboard</h2>
 					<div className="mb-3">
 						<label htmlFor="email" className="form-label">
 							Email
@@ -69,15 +65,13 @@ function UserLogin() {
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</div>
-					<button>Login</button>
+					<button>
+						Login
+					</button>
 				</form>
-				<p className="mt-3 mb-0 text-center">
-					Don't have an account?{" "}
-					<Link to="/registration">Register</Link>
-				</p>
 			</div>
 		</div>
 	);
 }
 
-export default UserLogin;
+export default AdminLogin;
