@@ -9,13 +9,18 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    image: {
-        type: String, 
+    images: [{
+        type: String,
         required: true,
-    },
+    }],
     price: {
         type: Number,
         required: true,
+    },
+    stock: {
+        type: Number,
+        required: true,
+        default: 0, // Default stock value can be set as needed
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

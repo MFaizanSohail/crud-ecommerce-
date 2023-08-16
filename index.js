@@ -5,6 +5,9 @@ const path = require("path");
 const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
 const cookieParser = require("cookie-parser");
+const cloudinary = require("cloudinary").v2;
+// const { CloudinaryStorage } = require("multer-storage-cloudinary");
+// const multer = require("multer");
 require("dotenv").config();
 
 const app = express();
@@ -18,6 +21,11 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+cloudinary.config({
+	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 mongoose.set("strictQuery", false);
 

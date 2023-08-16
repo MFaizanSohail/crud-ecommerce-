@@ -1,29 +1,52 @@
 const ProductModel = require("../model/ProductModel");
 const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+const bodyParser = require("body-parser");
+const fs = require("fs");
 
-cloudinary.config({
-	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET,
+if (!fs.existsSync("./uploads")) {
+	fs.mkdirSync("./uploads");
+}
+
+// Multer setup
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		cb(null, "./uploads");
+	},
+	filename: function (req, file, cb) {
+		cb(null, file.originalname);
+	},
 });
 
 const createProduct = async (req, res) => {
 	try {
-		const { title, description, price } = req.body;
-		const imageFile = req.files.image;
+		const { title, description, price, stock } = req.body;
+		const imageFiles = req.files; 
+		console.log(imageFiles);
 
-		const result = await cloudinary.uploader.upload(imageFile.path);
+		if (!imageFiles || !Array.isArray(imageFiles)) {
+			return res.status(400).json({ error: "Image files are required" });
+		}
+
+		const imageUrls = await Promise.all(
+			imageFiles.map(async (file) => {
+				const result = await cloudinary.uploader.upload(file.path);
+				return result.secure_url;
+			})
+		);
 
 		const newProduct = new ProductModel({
 			title,
 			description,
 			price,
-			image: result.secure_url,
+			stock,
+			images: imageUrls,
 		});
 
 		const savedProduct = await newProduct.save();
 		res.json(savedProduct);
 	} catch (error) {
+		console.error("Error creating product:", error);
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 };
