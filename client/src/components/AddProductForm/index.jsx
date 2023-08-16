@@ -6,13 +6,15 @@ import "./AddProductForm.css";
 function AddProductForm() {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
-	const [imageFile, setImageFile] = useState(null);
+	const [imageFiles, setImageFiles] = useState([]);
 	const [price, setPrice] = useState("");
+	const [stock, setStock] = useState(""); 
 	const [successMessage, setSuccessMessage] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 
 	const handleImageUpload = (e) => {
-		setImageFile(e.target.files[0]);
+		console.log("Images selected:", e.target.files);
+		setImageFiles(Array.from(e.target.files));
 	};
 
 	const handleSubmit = async (e) => {
@@ -23,9 +25,15 @@ function AddProductForm() {
 			formData.append("title", title);
 			formData.append("description", description);
 			formData.append("price", price);
-			formData.append("image", imageFile);
+			formData.append("stock", stock);
 
-			const response = await axios.post("/products/create", formData);
+			imageFiles.forEach((file, index) => {
+				formData.append(`images[${index}]`, file);
+			});
+
+			const response = await axios.post("/products/create", formData, {
+				"Content-Type": "multipart/form-data",
+			});
 
 			setSuccessMessage("Product added successfully");
 			setErrorMessage("");
@@ -63,6 +71,16 @@ function AddProductForm() {
 							type="file"
 							accept="image/*"
 							onChange={handleImageUpload}
+							multiple
+							required
+						/>
+					</div>
+					<div className="form-group">
+						<label>Quantity</label>
+						<input
+							type="number"
+							value={stock}
+							onChange={(e) => setStock(e.target.value)}
 							required
 						/>
 					</div>

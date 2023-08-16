@@ -2,17 +2,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAppContext  } from "../../context/AppContext";
 
 
 function UserLogin() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-    const { setIsLoggedIn, setLoginType } = useAuth();
+    const { setIsLoggedIn, setLoginType } = useAppContext();
 	const navigate = useNavigate();
 
 	const LoginHandler = (e) => {
-		e.preventDefault();
+		e.preventDefault(); 
 
 		const userData = {
 			email,

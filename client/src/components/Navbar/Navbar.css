@@ -1,0 +1,37 @@
+/* Navbar */
+.navbar {
+	background-color: #232f3E;
+    padding: 0rem 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: 84px;
+    width: 100%;
+    position: relative;
+}
+.navbar-left{
+	display: flex;
+    position: relative;
+    flex-direction: row;
+}
+
+.navbar-right {
+    position: relative;
+    display: flex;
+    width: 70%;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.navbar-link {
+	margin-right: 2.5rem;
+	color: white;
+	text-decoration: none;
+	font-size: large;
+}
+
+.logo-image {
+	width: 150px;
+}
+

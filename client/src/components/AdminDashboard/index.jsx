@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const User = () => {
+const AdminDashboard = () => {
 	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
@@ -27,12 +27,12 @@ const User = () => {
 	return (
 		<>
 			<div className="d-flex vh-100 bg-primary justify-content-center align-items-center ">
-				<div className="w-50 bg-white rounded p-3">
+				<div className="w-75 bg-white rounded p-3">
 					<Link to="/registration" className="btn btn-success">
 						Add +
 					</Link>
 					<h1>Users Table</h1>
-					<table className="table ">
+					<table className="table justify-content-cente">
 						<thead className="text-center">
 							<tr>
 								<th>Name</th>
@@ -75,4 +75,4 @@ const User = () => {
 	);
 };
 
-export default User;
+export default AdminDashboard;

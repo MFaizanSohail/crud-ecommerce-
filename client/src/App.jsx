@@ -3,11 +3,12 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import Home from "./pages/Home";
-import AdminDashboard from "./pages/AdminDashboard";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 import AddProductPage from "./pages/AddProductPage";
 import RegistrationPage from "./pages/RegistrationPage";
 import UserLoginPage from "./pages/UserLoginPage";
 import UserUpdatePage from "./pages/UserUpdatePage";
+import CartPage from "./pages/CartPage";
 
 function App() {
 	// const [count, setCount] = useState(0);
@@ -18,7 +19,7 @@ function App() {
 				<Routes>
 					<Route
 						path="/AdminDashboard"
-						element={<AdminDashboard />}
+						element={<AdminDashboardPage />}
 					></Route>
 					<Route path="/" element={<Home />}></Route>
 					<Route
@@ -34,6 +35,7 @@ function App() {
 						path="/AddProductForm"
 						element={<AddProductPage />}
 					></Route>
+					<Route path="/Cart" element={<CartPage />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</>

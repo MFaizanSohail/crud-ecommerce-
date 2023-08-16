@@ -1,12 +1,12 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import User from "../components/User";
-import { useAuth } from "../components/AuthContext"; 
+import AdminDashboard from "../components/AdminDashboard";
+import { useAppContext } from "../context/AppContext"; 
 import { useNavigate } from "react-router-dom";
 
-function AdminDashboard() {
-	const { loginType } = useAuth(); 
+function AdminDashboardPage() {
+	const { loginType } = useAppContext(); 
 	const navigate = useNavigate();
 
 
@@ -14,7 +14,7 @@ function AdminDashboard() {
 		return (
 			<>
 				<Navbar />
-				<User />
+				<AdminDashboard />
 				<Footer />
 			</>
 		);
@@ -24,4 +24,4 @@ function AdminDashboard() {
 	}
 }
 
-export default AdminDashboard;
+export default AdminDashboardPage;

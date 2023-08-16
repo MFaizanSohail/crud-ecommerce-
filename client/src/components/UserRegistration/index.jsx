@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import "./UserRegistration.css";
 
 function UserRegistration() {
 	const [name, setName] = useState("");
@@ -35,7 +36,7 @@ function UserRegistration() {
 
 	return (
 		<div className="d-flex vh-100 justify-content-center align-items-center bg-primary">
-			<div className="card p-4 shadow-sm">
+			<div className="card p-4 shadow-sm w-25">
 				<h2 className="mb-4 text-center">User Register</h2>
 				<form onSubmit={RegisterNewUser}>
 					<div className="mb-3">
