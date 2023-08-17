@@ -1,22 +1,22 @@
 const ProductModel = require("../model/ProductModel");
-const cloudinary = require("cloudinary").v2;
-const multer = require("multer");
-const bodyParser = require("body-parser");
-const fs = require("fs");
+// const cloudinary = require("cloudinary").v2;
+// const multer = require("multer");
+// const bodyParser = require("body-parser");
+// const fs = require("fs");
 
-if (!fs.existsSync("./uploads")) {
-	fs.mkdirSync("./uploads");
-}
+// if (!fs.existsSync("./uploads")) {
+// 	fs.mkdirSync("./uploads");
+// }
 
 // Multer setup
-var storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, "./uploads");
-	},
-	filename: function (req, file, cb) {
-		cb(null, file.originalname);
-	},
-});
+// var storage = multer.diskStorage({
+// 	destination: function (req, file, cb) {
+// 		cb(null, "./uploads");
+// 	},
+// 	filename: function (req, file, cb) {
+// 		cb(null, file.originalname);
+// 	},
+// });
 
 const createProduct = async (req, res) => {
 	try {
@@ -28,12 +28,12 @@ const createProduct = async (req, res) => {
 			return res.status(400).json({ error: "Image files are required" });
 		}
 
-		const imageUrls = await Promise.all(
-			imageFiles.map(async (file) => {
-				const result = await cloudinary.uploader.upload(file.path);
-				return result.secure_url;
-			})
-		);
+		// const imageUrls = await Promise.all(
+		// 	imageFiles.map(async (file) => {
+		// 		const result = await cloudinary.uploader.upload(file.path);
+		// 		return result.secure_url;
+		// 	})
+		// );
 
 		const newProduct = new ProductModel({
 			title,
