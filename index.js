@@ -5,7 +5,7 @@ const path = require("path");
 const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
 const cookieParser = require("cookie-parser");
-const cloudinary = require("cloudinary").v2;
+// const cloudinary = require("cloudinary").v2;
 // const { CloudinaryStorage } = require("multer-storage-cloudinary");
 // const multer = require("multer");
 require("dotenv").config();
@@ -21,11 +21,11 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-cloudinary.config({
-	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// cloudinary.config({
+// 	cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+// 	api_key: process.env.CLOUDINARY_API_KEY,
+// 	api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
 
 mongoose.set("strictQuery", false);
 
@@ -44,11 +44,26 @@ app.get("*", function (req, res) {
 	);
 });
 const connectdb = async () => {
-	try {
-		await mongoose.connect(process.env.MONGO_URL);
-		console.log("Connect : ${conn.connection.host}");
-	} catch (err) {
-		console.log(err);
+	const maxRetries = 5;
+	let retries = 0;
+
+	while (retries < maxRetries) {
+		try {
+			await mongoose.connect(process.env.MONGO_URL);
+			console.log(`Connected to MongoDB: ${mongoose.connection.host}`);
+			break; // Successfully connected, exit the loop
+		} catch (err) {
+			console.error(
+				`Connection attempt ${retries + 1} failed: ${err.message}`
+			);
+			retries++;
+			await new Promise((resolve) => setTimeout(resolve, 5000)); // Wait for 5 seconds before retrying
+		}
+	}
+	if (retries === maxRetries) {
+		console.error(
+			`Failed to connect to MongoDB after ${maxRetries} attempts.`
+		);
 		process.exit(1);
 	}
 };
